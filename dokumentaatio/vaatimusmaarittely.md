@@ -46,3 +46,15 @@ subgraph Account_Details_View [Account Details]
     E3[Amount]
 end
 ```
+## Perusversion toiminnallisuus
+* Käyttäjä voi luoda sovellukseen käyttäjätunnuksen ja asettaa sille salasanan.
+    * Jos käyttäjätunnus on jo käytössä, järjestelmä ilmoittaa asiasta.
+    * Jos salasana tai käyttäjätunnus on väärä, järjestelmä ilmoittaa asiasta.
+* Käyttäjä voi luoda, poistaa ja tarkastella tilejä.
+* Käyttäjä voi luoda, poistaa ja tarkastella tilitapahtumia.
+* Käyttäjä voi kirjautua ulos järjestelmästä.
+
+## Jatkokehitysideoita
+* Tilitapahtumien editointi.
+* Käyttäjätiimit, joiden jäsenillä voi olla erilaisia oikeuksia.
+* Tietokanta, johon tilit ja tilitiedot tallentuvat, on salattu ja salaamisen voi purkaa kirjautumalla sisään. Tämän myötä kirjautumisominaisuudesta tulee merkityksellinen järjestelmän toiminnan kannalta.
