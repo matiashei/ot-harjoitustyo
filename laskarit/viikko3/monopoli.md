@@ -14,4 +14,12 @@
     Ruutu "1" -- "0..8" Pelinappula
     Pelinappula "1" -- "1" Pelaaja
     Pelaaja "2..8" -- "1" Monopolipeli
+    Pelaaja "1" -- "0.." Rahaa
+    Sattuma "1" -- "1.." Kortti
+    Yhteismaa "1" -- "1.." Kortti
+    Kortti "1" -- "1.." Toiminto
+    Ruutu "1" -- "1.." Toiminto
+    Katu "1" -- "0..4" Talo
+    Katu "1" -- "0..1" Hotelli
+    Pelaaja "1" -- "0.." Katu
 ```
