@@ -1,0 +1,14 @@
+[project]
+name = "tilix-app"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Matias Heino" }]
+requires-python = ">=3.12,<4.0"
+dependencies = ["python-dotenv (>=1.2.2,<2.0.0)", "werkzeug (>=3.1.7,<4.0.0)"]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
