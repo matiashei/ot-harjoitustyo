@@ -1,6 +1,6 @@
 from tkinter import Tk
-from ui.ui import UI
-from db import initialize_database
+from src.ui.ui import UI
+from src.db import initialize_database
 
 def main():
     initialize_database()
