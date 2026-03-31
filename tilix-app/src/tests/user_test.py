@@ -1,7 +1,7 @@
 import unittest
-import db
-from repositories.user_repository import UserRepository
-from services.user_services import UserService
+from src import db
+from src.repositories.user_repository import UserRepository
+from src.services.user_services import UserService
 
 
 class TestUserService(unittest.TestCase):

@@ -1,7 +1,7 @@
 from tkinter import Label, Entry, Button, Frame
-from db import get_database_connection
-from repositories.user_repository import UserRepository
-from services.user_services import UserService
+from src.db import get_database_connection
+from src.repositories.user_repository import UserRepository
+from src.services.user_services import UserService
 
 class RegisterView:
     def __init__(self, root, show_login_view):
