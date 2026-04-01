@@ -10,7 +10,11 @@ class UserRepository:
     def create_user(self, user):
         password_hash = generate_password_hash(user.password)
         sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)"
-        db.execute(sql, (user.username, password_hash))
+        cursor = self._connection.cursor()
+        cursor.execute(sql, (user.username, password_hash))
+        self._connection.commit()
+        user.user_id = cursor.lastrowid
+        return user
 
     def find_user_by_username(self, username):
         row = db.query_one(
@@ -19,6 +23,6 @@ class UserRepository:
         )
 
         if row:
-            return User(row["username"], row["password_hash"])
+            return User(row["username"], row["password_hash"], row["id"])
 
         return None

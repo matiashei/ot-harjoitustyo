@@ -45,7 +45,8 @@ class LoginView:
         password = self._password_entry.get()
 
         if self._user_service.authenticate(username, password):
-            self._show_accounts_view(username)
+            user = self._user_service.find_user_by_username(username)
+            self._show_accounts_view(username, user.user_id)
             return
 
         self._status_label.config(text="Invalid username or password")

@@ -24,12 +24,13 @@ class UI:
         register_view = RegisterView(self._root, self._show_login_view)
         register_view.start()
 
-    def _show_accounts_view(self, username):
+    def _show_accounts_view(self, username, user_id):
         self._clear_view()
         accounts_view = AccountsView(
             self._root,
             self._show_login_view,
-            username
+            username,
+            user_id
         )
         accounts_view.start()
 

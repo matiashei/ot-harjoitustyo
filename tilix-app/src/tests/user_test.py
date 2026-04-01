@@ -16,6 +16,7 @@ class TestUserService(unittest.TestCase):
         self.user_service.create_user("testuser", "testpassword")
         user = self.user_service.find_user_by_username("testuser")
         self.assertIsNotNone(user)
+        self.assertIsNotNone(user.user_id)
         self.assertEqual(user.username, "testuser")
 
     def test_login_fails_with_wrong_password(self):

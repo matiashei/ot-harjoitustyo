@@ -1,14 +1,15 @@
 from tkinter import Label, Button, Frame
 
 class AccountsView:
-    def __init__(self, root, show_login_view, username):
+    def __init__(self, root, show_login_view, username, user_id):
       self._root = root
       self._show_login_view = show_login_view
       self._frame = Frame(self._root)
       self._username = username
+      self._user_id = user_id
 
     def start(self):
-        default_label = Label(self._frame, text= f"You are logged in as {self._username}", font=("Arial", 24, "bold"), bg="lightgreen")
+        default_label = Label(self._frame, text= f"You are logged in as {self._username}, user id: {self._user_id}", font=("Arial", 24, "bold"), bg="lightgreen")
         logout_button = Button(self._frame, text= "Logout", command=self._show_login_view)
 
         default_label.grid(row=0, column=0, columnspan=2, pady=30)

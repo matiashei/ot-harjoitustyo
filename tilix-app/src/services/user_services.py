@@ -8,7 +8,7 @@ class UserService:
 
     def create_user(self, username, password):
         user = User(username, password)
-        self._user_repository.create_user(user)
+        return self._user_repository.create_user(user)
 
     def find_user_by_username(self, username):
         return self._user_repository.find_user_by_username(username)
