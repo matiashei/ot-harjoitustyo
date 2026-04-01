@@ -7,5 +7,5 @@
 | 26.3. | 5    | Kirjautumis- ja rekisteröitymistoimintojen toteuttaminen harjoitustyöhön, ja alustavan käyttöliittymän luominen näille toiminnoille Tkinterillä.
 | 27.3. | 3    | Testien kirjoittamista, testikattavuusraportin luominen sekä invoke-komentojen kirjoittaminen harjoitustyöhön.
 | 31.3. | 1    | Tilien lisäämiseen liittyvän koodin kirjoittamista, pylintin käyttöönotto.
-| 1.4.  | 1    | Käyttäjä-id:n toteuttaminen, jotta tilit voidaan liittää tiettyyn käyttäjään.
+| 1.4.  | 2    | Käyttäjä-id:n toteuttaminen, jotta tilit voidaan liittää tiettyyn käyttäjään. Tilien luomiseen ja näyttämiseen liittyvän ui:n toteuttaminen aloitettu.
 | yht   | 15   | |
