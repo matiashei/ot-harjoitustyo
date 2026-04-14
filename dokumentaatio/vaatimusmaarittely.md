@@ -3,10 +3,16 @@
 Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertainen kirjanpito, jossa jokaisen tapahtuman yhteydessä merkitään sekä mistä raha on tullut että minne se on päätynyt.
 
 ## Käyttäjät
-Sovelluksella on alkuvaiheessa yksi käyttäjärooli eli _normaali käyttäjä_, muiden käyttäjäroolien tarpeellisuutta punnitaan myöhemmässä vaiheessa.
+Sovelluksella on alkuvaiheessa yksi käyttäjärooli eli _normaali käyttäjä_✅, muiden käyttäjäroolien tarpeellisuutta punnitaan myöhemmässä vaiheessa.
 
 ## Käyttöliittymäluonnos
-Sovellus koostuu neljästä eri näkymästä, jotka ovat kirjautumisnäkymä, rekisteröitymisnäkymä, tilit listaava näkymä sekä tilin tapahtumat näyttävä ja uusien tapahtumien lisäämisen mahdollistava näkymä.
+Sovellus koostuu kuudesta eri näkymästä, jotka ovat:
+* kirjautumisnäkymä✅
+* rekisteröitymisnäkymä✅
+* tilit listaava sekä yhteisbalanssin laskeva näkymä✅
+* uuden tilin lisäämisen mahdollistava näkymä ✅
+* tilin tapahtumat näyttävä näkymä
+* uusien tapahtumien lisäämisen mahdollistava näkymä
 ```mermaid
 flowchart TD
 
