@@ -21,7 +21,9 @@ A -->|Register| B[Create Account]
 B --> C
 
 C --> D[Accounts Overview]
-D --> E[Account Details]
+D --> E[New Account]
+D --> F[Edit Account]
+D --> G[Account Details]
 ```
 
 ```mermaid
