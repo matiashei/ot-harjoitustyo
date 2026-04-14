@@ -35,3 +35,7 @@ poetry run invoke coverage-report
 ```bash
 poetry run invoke lint
 ```
+* Koodin automaattinen formatointi
+```bash
+poetry run invoke format
+```
