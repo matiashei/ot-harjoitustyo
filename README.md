@@ -1,4 +1,4 @@
-# Tilixx App
+# Tilix App
 Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertaista talouden kirjanpitoa, jossa jokaisen tapahtuman yhteydessä merkitään sekä mistä raha on tullut että minne se on päätynyt. Käyttäjä luo sovellukseen henkilökohtaiset tunnukset.
 ## Dokumentaatio
 * [Vaatimusmäärittely](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/vaatimusmaarittely.md)
