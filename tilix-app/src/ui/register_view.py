@@ -3,6 +3,7 @@ from src.db import get_database_connection
 from src.repositories.user_repository import UserRepository
 from src.services.user_services import UserService
 
+
 class RegisterView:
     def __init__(self, root, show_login_view):
         self._root = root
@@ -16,9 +17,9 @@ class RegisterView:
         self._password_confirm_entry = None
         self._status_label = None
 
-
     def start(self):
-        register_label = Label(self._frame, text="Register", font=("Arial", 24, "bold"), bg="lightgreen")
+        register_label = Label(self._frame, text="Register", font=(
+            "Arial", 24, "bold"), bg="lightgreen")
         username_label = Label(self._frame, text="Username")
         self._username_entry = Entry(self._frame)
         password_label = Label(self._frame, text="Password")
@@ -26,8 +27,10 @@ class RegisterView:
         password_confirm_label = Label(self._frame, text="Confirm password")
         self._password_confirm_entry = Entry(self._frame, show="*")
         self._status_label = Label(self._frame, text="", fg="red")
-        submit_button = Button(self._frame, text="Submit", command=self.register)
-        login_view_button = Button(self._frame, text="Login", command=self._show_login_view)
+        submit_button = Button(
+            self._frame, text="Submit", command=self.register)
+        login_view_button = Button(
+            self._frame, text="Login", command=self._show_login_view)
 
         register_label.grid(row=0, column=0, columnspan=2, pady=30)
         username_label.grid(row=1, column=0)
@@ -51,7 +54,8 @@ class RegisterView:
         password_confirm = self._password_confirm_entry.get()
 
         if not username or not password:
-            self._status_label.config(text="Username and password are required")
+            self._status_label.config(
+                text="Username and password are required")
             return
 
         if password != password_confirm:

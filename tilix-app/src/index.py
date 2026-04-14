@@ -2,6 +2,7 @@ from tkinter import Tk
 from src.ui.ui import UI
 from src.db import initialize_database
 
+
 def main():
     initialize_database()
     window = Tk()
@@ -13,6 +14,7 @@ def main():
     ui_view.start()
 
     window.mainloop()
+
 
 if __name__ == "__main__":
     main()

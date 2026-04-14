@@ -6,7 +6,6 @@ from src.services.user_services import UserService
 
 class TestUserService(unittest.TestCase):
     def setUp(self):
-        db.initialize_database()
         db.drop_tables()
         db.initialize_database()
         user_repository = UserRepository(db.get_database_connection())
@@ -21,13 +20,15 @@ class TestUserService(unittest.TestCase):
 
     def test_login_fails_with_wrong_password(self):
         self.user_service.create_user("testuser", "testpassword")
-        self.assertFalse(self.user_service.authenticate("testuser", "wrongpassword"))
+        self.assertFalse(self.user_service.authenticate(
+            "testuser", "wrongpassword"))
 
     def test_login_fails_with_nonexistent_user(self):
         self.user_service.create_user("testuser", "testpassword")
-        self.assertFalse(self.user_service.authenticate("wronguser", "testpassword"))
+        self.assertFalse(self.user_service.authenticate(
+            "wronguser", "testpassword"))
 
     def test_login_succeeds_with_correct_credentials(self):
         self.user_service.create_user("testuser", "testpassword")
-        self.assertTrue(self.user_service.authenticate("testuser", "testpassword"))
-
+        self.assertTrue(self.user_service.authenticate(
+            "testuser", "testpassword"))

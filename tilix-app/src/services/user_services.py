@@ -2,6 +2,7 @@ from src.entities.user import User
 from src.repositories.user_repository import UserRepository
 from werkzeug.security import check_password_hash
 
+
 class UserService:
     def __init__(self, user_repository):
         self._user_repository = user_repository

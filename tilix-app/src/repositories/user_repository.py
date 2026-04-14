@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash
 from src import db
 from src.entities.user import User
 
+
 class UserRepository:
     def __init__(self, connection):
         self._connection = connection
