@@ -1,5 +1,20 @@
 # Ohjelmistotekniikka, harjoitustyö
-Aion toteuttaa sovelluksen, joka **mahdollistaa kirjanpidon** _kaksinkertaista kirjanpitoa_ käyttäen.
+
+## Dokumentaatio
+* [Vaatimusmäärittely](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/vaatimusmaarittely.md)
 * [Työaikakirjanpito](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/tyoaikakirjanpito.md)
-* [Laskarit](https://github.com/matiashei/ot-harjoitustyo/tree/main/laskarit)
 * [Changelog](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
+
+## Asennus
+1. Asenna sovelluksen riippuvuudet komennolla
+```bash
+poetry install
+```
+2. Alusta sovellus komennolla
+```bash
+poetry run invoke build
+```
+3. Käynnistä sovellus komennolla
+```bash
+poetry run invoke start
+```
