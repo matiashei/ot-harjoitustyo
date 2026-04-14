@@ -11,6 +11,7 @@ Sovellus koostuu kuudesta eri näkymästä, jotka ovat:
 * rekisteröitymisnäkymä✅
 * tilit listaava sekä yhteisbalanssin laskeva näkymä✅
 * uuden tilin lisäämisen mahdollistava näkymä ✅
+* tilin nimen vaihtamisen mahdollistava näkymä
 * tilin tapahtumat näyttävä näkymä
 * uusien tapahtumien lisäämisen mahdollistava näkymä
 ```mermaid
@@ -24,6 +25,7 @@ C --> D[Accounts Overview]
 D --> E[New Account]
 D --> F[Edit Account]
 D --> G[Account Details]
+D --> H[Change Account Name]
 ```
 
 ```mermaid
