@@ -17,23 +17,22 @@ class NewAccountView:
         self._status_label = None
 
     def start(self):
-        register_label = Label(self._frame, text="NEW ACCOUNT", font=(
+        register_label = Label(self._frame, text="CREATE ACCOUNT", font=(
             "Arial", 24, "bold"), bg="lightgreen")
+        go_back_button = Button(
+            self._frame, text="⏎ Accounts",
+            command=lambda: self._show_accounts_view(self._username, self._user_id))
         name_label = Label(self._frame, text="Account name")
         self.name_label = Entry(self._frame)
-        balance_label = Label(
-            self._frame, text="Initial balance (separate decimals with a dot)")
-        self._balance_entry = Entry(self._frame)
         self._status_label = Label(self._frame, text="", fg="red")
 
         self._create_button = Button(
             self._frame, text="Create account", command=self.create_account)
 
         register_label.grid(row=0, column=0, columnspan=2, pady=30)
+        go_back_button.grid(row=0, column=2, padx=10, pady=30)
         name_label.grid(row=1, column=0, pady=10)
         self.name_label.grid(row=1, column=1, pady=10)
-        balance_label.grid(row=2, column=0, pady=10)
-        self._balance_entry.grid(row=2, column=1, pady=10)
         self._status_label.grid(row=3, column=0, columnspan=2)
         self._create_button.grid(row=4, column=0, columnspan=2, pady=10)
         self._frame.pack()
@@ -43,21 +42,10 @@ class NewAccountView:
 
     def create_account(self):
         name = self.name_label.get().strip()
-        balance_text = self._balance_entry.get().strip()
 
         if not name:
             self._status_label.config(text="Account name is required")
             return
 
-        if not balance_text:
-            self._status_label.config(text="Initial balance is required")
-            return
-
-        try:
-            balance = float(balance_text)
-        except ValueError:
-            self._status_label.config(text="Initial balance must be a number")
-            return
-
-        self._account_service.create_account(name, balance, self._user_id)
+        self._account_service.create_account(name, self._user_id)
         self._show_accounts_view(self._username, self._user_id)

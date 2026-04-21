@@ -31,6 +31,16 @@ def initialize_database():
         )
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS transactions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            amount FLOAT NOT NULL,
+            date TEXT NOT NULL,
+            description TEXT,
+            account_id INTEGER REFERENCES accounts(id)
+        )
+    """)
+
     connection.commit()
 
 
@@ -59,5 +69,6 @@ def drop_tables():
     cursor = connection.cursor()
     cursor.execute("DROP TABLE IF EXISTS accounts")
     cursor.execute("DROP TABLE IF EXISTS users")
+    cursor.execute("DROP TABLE IF EXISTS transactions")
     connection.commit()
     connection.close()

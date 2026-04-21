@@ -6,14 +6,14 @@ class AccountRepository:
     def __init__(self, connection):
         self._connection = connection
 
-    def create_account(self, name, balance, user_id):
-        sql = "INSERT INTO accounts (name, balance, user_id) VALUES (?, ?, ?)"
+    def create_account(self, name, user_id):
+        sql = "INSERT INTO accounts (name, balance, user_id) VALUES (?, 0, ?)"
         cursor = self._connection.cursor()
-        cursor.execute(sql, (name, balance, user_id))
+        cursor.execute(sql, (name, user_id))
         self._connection.commit()
 
         account_id = cursor.lastrowid
-        return Account(account_id, name, balance, user_id)
+        return Account(account_id, name, 0, user_id)
 
     def find_accounts_by_user_id(self, user_id):
         rows = db.query(
