@@ -10,4 +10,7 @@
 | 1.4.  | 2    | Tilien luomiseen ja näyttämiseen liittyvän ui:n toteuttaminen aloitettu.
 | 13.4. | 3 | Käyttäjän lisäämät tilit näyttävän näkymän toteuttaminen.
 | 14.4. | 6 | Tilien poistamisen mahdollistavien ominaisuuksien toteuttaminen, virheiden korjaamista ja dokumentaation päivittämistä.
-| yhteensä   | 25 h   | |
+| 16.4. | 3 | Tilitapahtumien lisäämiseen liittyvän koodin kirjoittamista.
+| 20.4. | 7 | Tilitapahtumien lisäämiseen liittyvän toiminnallisuuden ja UI:n kirjoittamista, Treeview-komponentin käyttöönotto.
+| 21.4. | 7 | Tilitapahtumien lisäämiseen liittyvän toiminnallisuuden ja UI:n viimeistelyä, bugien korjaamista, dokumentaation päivittämistä.
+| yhteensä   | 42 h   | |

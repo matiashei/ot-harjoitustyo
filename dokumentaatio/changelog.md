@@ -8,3 +8,8 @@
 
 - Tilien lisäämiseen ja poistamiseen liittyvä perustoiminnallisuus sekä käyttöliittymäpuoli on toteutettu.
 - Pylint otettu käyttöön ja invoke-käskyt luotu linttaamisen lisäksi buildaamiselle sekä formatoinnille.
+
+## Viikko 5
+
+- Tilitapahtumien lisäämiseen liittyvä perustoiminnallisuus sekä käyttöliittymäpuoli on toteutettu.
+- Käyttöliittymää on parannettu etenkin ottamalla Tkinterin Treeview-komponentti käyttöön tilien ja tilitapahtumien listauksessa.
