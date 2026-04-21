@@ -12,7 +12,7 @@ Sovellus koostuu viidestä eri näkymästä, jotka ovat:
 * tilit listaava sekä yhteisbalanssin laskeva näkymä✅
 * uuden tilin lisäämisen mahdollistava näkymä ✅
 * tilin nimen vaihtamisen mahdollistava näkymä
-* tilin transaktiot näyttävä näkymä, josta käsin voidaan myös lisätä ja muokata tapahtumia✅
+* tilin transaktiot näyttävä näkymä✅, josta käsin voidaan myös lisätä✅ ja muokata tapahtumia
 ```mermaid
 flowchart TD
 
