@@ -3,12 +3,14 @@ from tkinter import ttk, Label, Button, Frame, Entry, messagebox
 import re
 from wsgiref import validate
 
+
 def validate_date(date_string):
     try:
         datetime.strptime(date_string, "%Y-%m-%d")
         return True
     except ValueError:
         return False
+
 
 COLUMNS = ("date", "description", "amount")
 HEADERS = ("Date", "Description", "Amount")
@@ -62,8 +64,10 @@ class TransactionsView:
         self.tree.grid(row=3, column=0, columnspan=4, pady=10)
 
         self._date_text.grid(row=4, column=0, padx=5, pady=(10, 2), sticky="w")
-        self._description_text.grid(row=4, column=1, padx=5, pady=(10, 2), sticky="w")
-        self._amount_text.grid(row=4, column=2, padx=5, pady=(10, 2), sticky="w")
+        self._description_text.grid(
+            row=4, column=1, padx=5, pady=(10, 2), sticky="w")
+        self._amount_text.grid(row=4, column=2, padx=5,
+                               pady=(10, 2), sticky="w")
         self._date_entry.grid(row=5, column=0, padx=5, pady=(0, 10))
         self._description_entry.grid(row=5, column=1, padx=5, pady=(0, 10))
         self._amount_entry.grid(row=5, column=2, padx=5, pady=(0, 10))
@@ -92,13 +96,15 @@ class TransactionsView:
             return
 
         if date and not validate_date(date):
-            messagebox.showerror("Error", "Must be a valid date in YYYY-MM-DD format")
+            messagebox.showerror(
+                "Error", "Must be a valid date in YYYY-MM-DD format")
             return
 
         try:
             amount = float(amount_text)
         except ValueError:
-            messagebox.showerror("Error", "Amount must be a number, use a dot to separate decimals")
+            messagebox.showerror(
+                "Error", "Amount must be a number, use a dot to separate decimals")
             return
 
         self._transaction_service.create_transaction(

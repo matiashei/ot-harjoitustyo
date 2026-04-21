@@ -24,7 +24,7 @@ class TransactionRepository:
         transactions = []
         for row in rows:
             transactions.append(
-                Transaction(row["id"], row["amount"],row["date"],
+                Transaction(row["id"], row["amount"], row["date"],
                             row["description"], row["account_id"]))
 
         return transactions

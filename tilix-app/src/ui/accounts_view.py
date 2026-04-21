@@ -3,6 +3,7 @@ from tkinter import Label, Button, Frame, ttk
 COLUMNS = ("name", "balance")
 HEADERS = ("Name", "Balance")
 
+
 class AccountsView:
     def __init__(self, root, show_login_view, show_new_account_view,
                  show_transactions_view, account_service, username, user_id):
