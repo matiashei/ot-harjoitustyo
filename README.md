@@ -4,6 +4,7 @@ Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertaista taloude
 * [Vaatimusmäärittely](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/vaatimusmaarittely.md)
 * [Työaikakirjanpito](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/tyoaikakirjanpito.md)
 * [Changelog](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
+* [Arkkitehtuurikuvaus](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
 1. Asenna sovelluksen riippuvuudet komennolla:
