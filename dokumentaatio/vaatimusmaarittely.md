@@ -6,14 +6,13 @@ Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertainen kirjanp
 Sovelluksella on alkuvaiheessa yksi käyttäjärooli eli _normaali käyttäjä_✅, muiden käyttäjäroolien tarpeellisuutta punnitaan myöhemmässä vaiheessa.
 
 ## Käyttöliittymäluonnos
-Sovellus koostuu kuudesta eri näkymästä, jotka ovat:
+Sovellus koostuu viidestä eri näkymästä, jotka ovat:
 * kirjautumisnäkymä✅
 * rekisteröitymisnäkymä✅
 * tilit listaava sekä yhteisbalanssin laskeva näkymä✅
 * uuden tilin lisäämisen mahdollistava näkymä ✅
 * tilin nimen vaihtamisen mahdollistava näkymä
-* tilin tapahtumat näyttävä näkymä
-* uusien tapahtumien lisäämisen mahdollistava näkymä
+* tilin transaktiot näyttävä näkymä, josta käsin voidaan myös lisätä ja muokata tapahtumia✅
 ```mermaid
 flowchart TD
 
