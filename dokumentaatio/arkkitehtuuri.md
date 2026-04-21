@@ -12,7 +12,7 @@ B --> D
 
 ## Sovelluslogiikka
 
-Sovelluksen loogisen tietomallin muodostavat luokat [User](../src/entities/user.py), [Account](../src/entities/account.py) ja [Transaction](../src/entities/transaction.py).
+Sovelluksen loogisen tietomallin muodostavat luokat [User](https://github.com/matiashei/ot-harjoitustyo/blob/main/tilix-app/src/entities/user.py), [Account](https://github.com/matiashei/ot-harjoitustyo/blob/main/tilix-app/src/entities/account.py) ja [Transaction](https://github.com/matiashei/ot-harjoitustyo/blob/main/tilix-app/src/entities/transaction.py).
 
 ```mermaid
 classDiagram
