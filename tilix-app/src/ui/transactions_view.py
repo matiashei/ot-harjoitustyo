@@ -98,7 +98,7 @@ class TransactionsView:
         try:
             amount = float(amount_text)
         except ValueError:
-            messagebox.showerror("Error", "Amount must be a number")
+            messagebox.showerror("Error", "Amount must be a number, use a dot to separate decimals")
             return
 
         self._transaction_service.create_transaction(
