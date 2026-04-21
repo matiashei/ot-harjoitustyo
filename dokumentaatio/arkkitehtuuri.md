@@ -1,10 +1,10 @@
-#Pakkauskaavio
+# Pakkauskaavio
 
-'''mermaid
+```mermaid
 flowchart TD
 
-UI --> Services
-Services --> Repositories
-Services --> Entities
-Repositories --> Entities
-'''
+A[UI] --> B[Services]
+B --> C[Repositories]
+C --> D[Entities]
+B --> D
+```
