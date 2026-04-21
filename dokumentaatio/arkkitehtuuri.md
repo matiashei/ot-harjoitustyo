@@ -16,6 +16,8 @@ Sovelluksen loogisen tietomallin muodostavat luokat [User](https://github.com/ma
 
 ```mermaid
 classDiagram
+    Transaction --> Account
+    Account --> User 
     class User {
         -id: int
         -username: str
