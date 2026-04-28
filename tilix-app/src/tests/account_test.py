@@ -1,15 +1,22 @@
 import unittest
 from src import db
 from src.repositories.account_repository import AccountRepository
+from src.repositories.transaction_repository import TransactionRepository
 from src.services.account_services import AccountService
+from src.services.transaction_services import TransactionService
 
 
 class TestAccountService(unittest.TestCase):
     def setUp(self):
         db.drop_tables()
         db.initialize_database()
-        account_repository = AccountRepository(db.get_database_connection())
-        self.account_service = AccountService(account_repository)
+        connection = db.get_database_connection()
+        account_repository = AccountRepository(connection)
+        transaction_repository = TransactionRepository(connection)
+        self.account_service = AccountService(
+            account_repository, transaction_repository)
+        self.transaction_service = TransactionService(
+            transaction_repository, account_repository)
 
     def test_create_account(self):
         self.account_service.create_account("Test Account", 1)
@@ -35,6 +42,12 @@ class TestAccountService(unittest.TestCase):
         self.account_service.delete_account(1)
         account = self.account_service.find_account_by_id(1)
         self.assertIsNone(account)
+
+    def test_update_account_name(self):
+        self.account_service.create_account("Account Name", 1)
+        self.account_service.update_account_name(1, "New Account Name")
+        account = self.account_service.find_account_by_id(1)
+        self.assertEqual(account.name, "New Account Name")
 
     def test_update_account_balance(self):
         self.account_service.create_account("Test Account", 1)

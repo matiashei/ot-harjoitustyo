@@ -16,7 +16,8 @@ class UI:
         connection = get_database_connection()
         account_repository = AccountRepository(connection)
         transaction_repository = TransactionRepository(connection)
-        self._account_service = AccountService(account_repository)
+        self._account_service = AccountService(
+            account_repository, transaction_repository)
         self._transaction_service = TransactionService(
             transaction_repository, account_repository)
 
