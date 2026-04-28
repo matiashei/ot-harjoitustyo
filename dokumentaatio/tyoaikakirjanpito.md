@@ -13,4 +13,7 @@
 | 16.4. | 3 | Tilitapahtumien lisäämiseen liittyvän koodin kirjoittamista.
 | 20.4. | 7 | Tilitapahtumien lisäämiseen liittyvän toiminnallisuuden ja UI:n kirjoittamista, Treeview-komponentin käyttöönotto.
 | 21.4. | 7 | Tilitapahtumien lisäämiseen liittyvän toiminnallisuuden ja UI:n viimeistelyä, bugien korjaamista, dokumentaation päivittämistä.
-| yhteensä   | 42 h   | |
+| 25.4. | 3 | Tilitapahtumien muokkaamiseen liittyvän koodin kirjoittamista.
+| 27.4. | 5 | Tilitapahtumien muokkaamiseen ja poistamiseen liittyvän koodin kirjoittamista.
+| 28.4. | 7 | Tilien muokkaamiseen ja poistamiseen liittyvän koodin kirjoittamista, bugien korjaamista, ui:n parantamista esimerkiksi nappien asettelun osalta.
+| yhteensä   | 57 h   | |
