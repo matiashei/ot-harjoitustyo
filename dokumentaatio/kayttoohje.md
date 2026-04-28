@@ -4,13 +4,16 @@ Lataa projektin viimeisin release Githubista.
 
 ## Konfigurointi
 Asenna riippuvuudet komennolla:
-```poetry install
+```
+poetry install
 ```
 Suorita alustustoimenpiteet komennolla:
-```poetry run invoke build
+```
+poetry run invoke build
 ```
 Käynnistä sovellus komennolla:
-```poetry run invoke start
+```
+poetry run invoke start
 ```
 ## Kirjautuminen ja rekisteröityminen
 Sovellus käynnistyy kirjautumisnäkymään, jossa voi joko kirjautua olemassa olevalla käyttäjällä tai siirtyä näkymään, joka mahdollistaa uuden käyttäjätunnuksen luomisen.
