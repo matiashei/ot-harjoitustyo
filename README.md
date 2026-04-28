@@ -6,6 +6,8 @@ Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertaista taloude
 * [Changelog](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
 * [Arkkitehtuurikuvaus](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
 
+Viikon 5 release löytyy [täältä](https://github.com/matiashei/ot-harjoitustyo/releases/tag/viikko5).
+
 ## Asennus
 1. Asenna sovelluksen riippuvuudet komennolla:
 ```bash
