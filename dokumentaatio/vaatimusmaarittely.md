@@ -11,8 +11,8 @@ Sovellus koostuu viidestä eri näkymästä, jotka ovat:
 * rekisteröitymisnäkymä✅
 * tilit listaava sekä yhteisbalanssin laskeva näkymä✅
 * uuden tilin lisäämisen mahdollistava näkymä ✅
-* tilin nimen vaihtamisen mahdollistava näkymä
-* tilin transaktiot näyttävä näkymä✅, josta käsin voidaan myös lisätä✅ ja muokata tapahtumia
+* tilin nimen vaihtamisen mahdollistava näkymä✅
+* tilin transaktiot näyttävä näkymä✅, josta käsin voidaan myös lisätä✅, poistaa✅ ja muokata tapahtumia✅.
 ```mermaid
 flowchart TD
 

@@ -13,3 +13,10 @@
 
 - Tilitapahtumien lisäämiseen liittyvä perustoiminnallisuus sekä käyttöliittymäpuoli on toteutettu.
 - Käyttöliittymää on parannettu etenkin ottamalla Tkinterin Treeview-komponentti käyttöön tilien ja tilitapahtumien listauksessa.
+
+## Viikko 6
+
+- Tilitapahtumien muokkaamiseen ja poistamiseen liittyvä toiminnallisuus ja käyttöliittymäpuoli on toteutettu.
+- Tilien muokkaamiseen ja poistamiseen liittyvä toiminnallisuus ja käyttöliittymäpuoli on toteutettu.
+- Käyttöliittymää on parannettu nappien asettelun osalta.
+- Dokumentaatioon on lisätty käyttöohje sekä sitä on paranneltu muilta osin.
