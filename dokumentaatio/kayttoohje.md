@@ -7,6 +7,10 @@ Asenna riippuvuudet komennolla:
 ```
 poetry install
 ```
+Aktivoi virtuaaliympäristö komennolla:
+```
+eval $(poetry env activate)
+```
 Suorita alustustoimenpiteet komennolla:
 ```
 poetry run invoke build
