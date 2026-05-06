@@ -11,39 +11,39 @@ Viikon 6 release löytyy [täältä](https://github.com/matiashei/ot-harjoitusty
 
 ## Asennus
 1. Asenna sovelluksen riippuvuudet komennolla:
-```bash
+```
 poetry install
 ```
 2. Käynnistä virtuaaliympäristö komennolla:
-```bash
+```
 eval $(poetry env activate)
 ```
 3. Alusta sovellus komennolla:
-```bash
+```
 poetry run invoke build
 ```
 4. Käynnistä sovellus komennolla:
-```bash
+```
 poetry run invoke start
 ```
 ## Komentorivitoiminnot
 * Sovelluksen käynnistäminen komennolla:
-```bash
+```
 poetry run invoke start
 ```
 * Testien suorittaminen komennolla:
-```bash
+```
 poetry run invoke test
 ```
 * Testikattavuusraportin muodostaminen komennolla:
-```bash
+```
 poetry run invoke coverage-report
 ```
 * Pylint-tarkistusten suorittaminen komennolla:
-```bash
+```
 poetry run invoke lint
 ```
 * Koodin automaattinen formatointi
-```bash
+```
 poetry run invoke format
 ```
