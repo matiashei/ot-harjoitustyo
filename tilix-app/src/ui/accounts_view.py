@@ -142,7 +142,7 @@ class AccountsView:
             return
         if messagebox.askyesno("Confirm", "Delete selected account and its transactions?"):
             self._account_service.delete_account(int(item_id))
-            self._restart_view()
+            self._refresh_view()
 
     def _refresh_view(self):
         self._frame.destroy()
