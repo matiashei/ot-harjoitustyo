@@ -5,26 +5,24 @@ Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertainen kirjanp
 ## Käyttäjät
 Sovelluksella on yksi käyttäjärooli eli _normaali käyttäjä_, käyttäjiä voi olla useita.
 
-## Käyttöliittymäluonnos
+## Käyttöliittymä
 Sovellus koostuu viidestä eri näkymästä, jotka ovat:
-* kirjautumisnäkymä✅
-* rekisteröitymisnäkymä✅
-* tilit listaava sekä yhteisbalanssin laskeva näkymä✅
-* uuden tilin lisäämisen mahdollistava näkymä ✅
-* tilin nimen vaihtamisen mahdollistava näkymä✅
-* tilin transaktiot näyttävä näkymä✅, josta käsin voidaan myös lisätä✅, poistaa✅ ja muokata tapahtumia✅.
+* kirjautumisnäkymä
+* rekisteröitymisnäkymä
+* tilit listaava sekä yhteisbalanssin laskeva näkymä
+* uuden tilin lisäämisen mahdollistava näkymä 
+* tilin nimen vaihtamisen mahdollistava näkymä
+* tilin transaktiot näyttävä näkymä, josta käsin voidaan myös lisätä, poistaa ja muokata tapahtumia.
 ```mermaid
 flowchart TD
-
-A[Login] -->|Login| C[Dashboard]
+A[Login] -->|Login| D[Accounts Overview]
 A -->|Register| B[Create Account]
-B --> C
-
-C --> D[Accounts Overview]
+B--> A
 D --> E[New Account]
-D --> F[Edit Account]
-D --> G[Account Details]
+D --> G[Account Transactions]
 D --> H[Change Account Name]
+G --> I[Edit Transaction]
+D -->|Logout|A
 ```
 
 ```mermaid
