@@ -3,7 +3,7 @@
 Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertainen kirjanpito, jossa jokaisen tapahtuman yhteydessä merkitään sekä mistä raha on tullut että minne se on päätynyt.
 
 ## Käyttäjät
-Sovelluksella on alkuvaiheessa yksi käyttäjärooli eli _normaali käyttäjä_✅, muiden käyttäjäroolien tarpeellisuutta punnitaan myöhemmässä vaiheessa.
+Sovelluksella on yksi käyttäjärooli eli _normaali käyttäjä_, käyttäjiä voi olla useita.
 
 ## Käyttöliittymäluonnos
 Sovellus koostuu viidestä eri näkymästä, jotka ovat:
@@ -55,15 +55,11 @@ subgraph Account_Details_View [Account Details]
     E3[Amount]
 end
 ```
-## Perusversion toiminnallisuus
+## Toiminnallisuus
 * Käyttäjä voi luoda sovellukseen käyttäjätunnuksen ja asettaa sille salasanan.
     * Jos käyttäjätunnus on jo käytössä, järjestelmä ilmoittaa asiasta.
+* Käyttäjä voi kirjautua sovellukseen.
     * Jos salasana tai käyttäjätunnus on väärä, järjestelmä ilmoittaa asiasta.
-* Käyttäjä voi luoda, poistaa ja tarkastella tilejä.
-* Käyttäjä voi luoda, poistaa ja tarkastella tilitapahtumia.
+* Käyttäjä voi luoda, muokata poistaa ja tarkastella tilejä.
+* Käyttäjä voi luoda, muokata, poistaa ja tarkastella tilitapahtumia.
 * Käyttäjä voi kirjautua ulos järjestelmästä.
-
-## Jatkokehitysideoita
-* Tilitapahtumien editointi.
-* Käyttäjätiimit, joiden jäsenillä voi olla erilaisia oikeuksia.
-* Tietokanta, johon tilit ja tilitiedot tallentuvat, on salattu ja salaamisen voi purkaa kirjautumalla sisään. Tämän myötä kirjautumisominaisuudesta tulee merkityksellinen järjestelmän toiminnan kannalta.
