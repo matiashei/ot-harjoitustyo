@@ -6,6 +6,7 @@ Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertaista taloude
 * [Työaikakirjanpito](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/tyoaikakirjanpito.md)
 * [Changelog](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
 * [Arkkitehtuurikuvaus](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
+* [Testaaminen](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/testaus.md)
 
 Viikon 6 release löytyy [täältä](https://github.com/matiashei/ot-harjoitustyo/releases/tag/viikko6).
 
