@@ -1,14 +1,14 @@
 # Tilix App
 Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertaista talouden kirjanpitoa, jossa jokaisen tapahtuman yhteydessä merkitään sekä mistä raha on tullut että minne se on päätynyt. Käyttäjä luo sovellukseen henkilökohtaiset tunnukset.
 ## Dokumentaatio
-* [Käyttöohje](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/kayttoohje.md)
-* [Vaatimusmäärittely](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/vaatimusmaarittely.md)
-* [Työaikakirjanpito](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/tyoaikakirjanpito.md)
-* [Changelog](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
-* [Arkkitehtuurikuvaus](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
-* [Testaaminen](https://github.com/matiashei/ot-harjoitustyo/blob/main/dokumentaatio/testaus.md)
+* [Käyttöohje](dokumentaatio/kayttoohje.md)
+* [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
+* [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
+* [Changelog](dokumentaatio/changelog.md)
+* [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
+* [Testaaminen](dokumentaatio/testaus.md)
 
-Viikon 6 release löytyy [täältä](https://github.com/matiashei/ot-harjoitustyo/releases/tag/viikko6).
+Viikon 6 release löytyy [täältä](releases/tag/viikko6).
 
 ## Asennus
 1. Asenna sovelluksen riippuvuudet komennolla:
