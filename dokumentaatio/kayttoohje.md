@@ -7,6 +7,10 @@ Asenna riippuvuudet komennolla:
 ```
 poetry install
 ```
+Luo tietokantatiedoston nimen määrittelevä .env-tiedosto projektin juureen, tiedoston sisältö voi olla esimerkiksi:
+```
+DATABASE_FILENAME=database.sqlite
+```
 Aktivoi virtuaaliympäristö komennolla:
 ```
 eval $(poetry env activate)
