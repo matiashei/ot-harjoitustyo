@@ -3,23 +3,24 @@
 Lataa projektin viimeisin release Githubista.
 
 ## Konfigurointi
-Asenna riippuvuudet komennolla:
+1. Siirry kansioon ```tilix-app```
+2. Asenna riippuvuudet komennolla:
 ```
 poetry install
 ```
-Luo tietokantatiedoston nimen määrittelevä .env-tiedosto projektin juureen, tiedoston sisältö voi olla esimerkiksi:
+3. Luo tietokantatiedoston nimen määrittelevä .env-tiedosto projektin juureen, tiedoston sisältö voi olla esimerkiksi:
 ```
 DATABASE_FILENAME=database.sqlite
 ```
-Aktivoi virtuaaliympäristö komennolla:
+4. Aktivoi virtuaaliympäristö komennolla:
 ```
 eval $(poetry env activate)
 ```
-Suorita alustustoimenpiteet komennolla:
+5. Suorita alustustoimenpiteet komennolla:
 ```
 poetry run invoke build
 ```
-Käynnistä sovellus komennolla:
+6. Käynnistä sovellus komennolla:
 ```
 poetry run invoke start
 ```
