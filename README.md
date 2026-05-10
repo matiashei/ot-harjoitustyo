@@ -7,6 +7,7 @@ Sovelluksen avulla käyttäjän on mahdollista toteuttaa kahdenkertaista taloude
 * [Changelog](dokumentaatio/changelog.md)
 * [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 * [Testaaminen](dokumentaatio/testaus.md)
+* [Tekoälytyökalujen käyttö](dokumentaatio/tekoaly.md)
 
 Viikon 6 release löytyy [täältä](releases/tag/viikko6).
 
