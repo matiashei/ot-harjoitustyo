@@ -1,6 +1,6 @@
 # Vaatimusmäärittely
 ## Sovelluksen tarkoitus
-Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertainen kirjanpito, jossa jokaisen tapahtuman yhteydessä merkitään sekä mistä raha on tullut että minne se on päätynyt.
+Sovelluksen avulla käyttäjän on mahdollista toteuttaa kahdenkertaista kirjanpito, jossa jokaisen tapahtuman yhteydessä merkitään sekä mistä raha on tullut että minne se on päätynyt.
 
 ## Käyttäjät
 Sovelluksella on yksi käyttäjärooli eli _normaali käyttäjä_, käyttäjiä voi olla useita.
@@ -16,7 +16,7 @@ Sovellus koostuu viidestä eri näkymästä, jotka ovat:
 ```mermaid
 flowchart TD
 A[Login] -->|Login| D[Accounts Overview]
-A -->|Register| B[Create Account]
+A -->|Register| B[Create User]
 B--> A
 D --> E[New Account]
 D --> G[Account Transactions]
@@ -59,5 +59,6 @@ end
 * Käyttäjä voi kirjautua sovellukseen.
     * Jos salasana tai käyttäjätunnus on väärä, järjestelmä ilmoittaa asiasta.
 * Käyttäjä voi luoda, muokata poistaa ja tarkastella tilejä.
+    * Tilit voivat olla käyttäjän hallinnoimia tai ulkoisia tilejä, kuten vuokranantajan tai työnantajan. 
 * Käyttäjä voi luoda, muokata, poistaa ja tarkastella tilitapahtumia.
 * Käyttäjä voi kirjautua ulos järjestelmästä.

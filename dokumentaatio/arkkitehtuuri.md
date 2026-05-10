@@ -23,7 +23,7 @@ flowchart TD
 
 Sovelluksen loogisen tietomallin muodostavat luokat `User`, `Account` ja `Transaction`.
 
-`User` kuvaa käyttäjää, `Account` käyttäjän tiliä ja `Transaction` tilille kohdistuvaa tapahtumaa. Tili yhdistetään id:n perusteella käyttäjään ja tilitapahtuma taas yhdistetään id:n kautta tiliin.
+`User` kuvaa käyttäjää, `Account` käyttäjän tiliä ja `Transaction` tileille kohdistuvaa tapahtumaa. Tili yhdistetään id:n perusteella käyttäjään ja tilitapahtuma taas yhdistetään id:n kautta debet- ja kredit-tileihin.
 
 ```mermaid
 classDiagram
@@ -41,6 +41,7 @@ classDiagram
         -name: str
         -balance: float
         -user_id: int
+        -is_external: Boolean
     }
 
     class Transaction {
@@ -48,10 +49,11 @@ classDiagram
         -amount: float
         -date: str
         -description: str
-        -account_id: int
+        -from_account_id: int
+        -to_account_id: int
     }
 ```
-Sovelluksen toiminnallisuuksista vastaavat service-luokat `UserService`, `AccountService` ja `TransactionService`. `UserService` vastaa käyttäjien luonnista ja kirjautumistarkistuksesta, `AccountService` vastaa tilien luomisesta, nimeämisestä, hakemisesta ja poistamisesta ja `TransactionService` vastaa tilitapahtumien luonnista, muokkaamisesta, hakemisesta ja poistamisesta sekä tilin saldon päivittämisestä tapahtumien muuttuessa.
+Sovelluksen toiminnallisuuksista vastaavat service-luokat `UserService`, `AccountService` ja `TransactionService`. `UserService` vastaa käyttäjien luonnista ja kirjautumistarkistuksesta, `AccountService` vastaa tilien luomisesta, nimeämisestä, hakemisesta ja poistamisesta ja `TransactionService` vastaa tilitapahtumien luonnista, muokkaamisesta, hakemisesta ja poistamisesta sekä tilien saldon päivittämisestä tapahtumien muuttuessa.
 Tämän lisäksi sovelluksessa on repository-luokat, jotka huolehtivat tietokantayhteyksistä ja tietojen tallentamisesta ja hakemisesta. `UserRepository` huolehtii käyttäjätiedoista, `AccountRepository` tilitiedoista ja `TransactionRepository` tilitapahtumatiedoista.
 
 ## Tietojen pysyväistallennus
@@ -62,4 +64,4 @@ SQLite-tietokannassa on kolme taulua:
 
 - `users`: käyttäjätunnus ja salasana werkzeug-kirjastolla salattuna
 - `accounts`: tilin nimi, saldo ja tilin luoneen käyttäjän id
-- `transactions`: tilitapahtuman summa (positiivinen tai negatiivinen), päivämäärä, kuvaus sekä tilin, jolle tapahtuma on luotu, id..
+- `transactions`: tilitapahtuman summa (positiivinen tai negatiivinen), päivämäärä, kuvaus sekä debet- ja kredit-tilit, id.

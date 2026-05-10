@@ -20,3 +20,8 @@
 - Tilien muokkaamiseen ja poistamiseen liittyvä toiminnallisuus ja käyttöliittymäpuoli on toteutettu.
 - Käyttöliittymää on parannettu nappien asettelun osalta.
 - Dokumentaatioon on lisätty käyttöohje sekä sitä on paranneltu muilta osin.
+
+## Viikko 7
+
+- Uutena ominaisuutena on toteutettu toiminnallisuus ja käyttöliittymäpuoli, jotka mahdollistavat merkinnät siitä, mistä rahat on otettu ja minne ne on siirretty. Tämä mahdollistaa varsinaisen kahdenkertaisen kirjanpidon määritelmällisesti.
+- Dokumentaatio on päivitetty vastaamaan sovelluksen lopullista versiota.
