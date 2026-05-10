@@ -20,7 +20,7 @@ class AccountService:
         self._account_repository = account_repository
         self._transaction_repository = transaction_repository
 
-    def create_account(self, name, user):
+    def create_account(self, name, user, is_external=False):
         """
         Luo uuden tilin.
 
@@ -32,7 +32,7 @@ class AccountService:
             jonka balanssiksi on alustettu 0€.
       """
         user_id = user.user_id if hasattr(user, "user_id") else user
-        return self._account_repository.create_account(name, user_id)
+        return self._account_repository.create_account(name, user_id, is_external)
 
     def find_account_by_id(self, account_id):
         """
@@ -58,6 +58,10 @@ class AccountService:
         """
         user_id = user.user_id if hasattr(user, "user_id") else user
         return self._account_repository.find_accounts_by_user_id(user_id)
+
+    def find_transaction_accounts_by_user_id(self, user):
+        user_id = user.user_id if hasattr(user, "user_id") else user
+        return self._account_repository.find_transaction_accounts_by_user_id(user_id)
 
     def delete_account(self, account_id):
         """

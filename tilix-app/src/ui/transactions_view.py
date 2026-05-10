@@ -1,9 +1,8 @@
 from datetime import datetime
 from tkinter import ttk, Label, Button, Frame, Entry, messagebox, Toplevel
-import re
 
 
-def validate_date(date_string):
+def _validate_date(date_string):
     try:
         datetime.strptime(date_string, "%Y-%m-%d")
         return True
@@ -11,20 +10,26 @@ def validate_date(date_string):
         return False
 
 
-COLUMNS = ("date", "description", "amount")
-HEADERS = ("Date", "Description", "Amount")
+COLUMNS = ("from_account", "to_account", "amount")
+HEADERS = ("Kredit (from)", "Debet (to)", "Amount")
 
 
 class TransactionsView:
     def __init__(self, root, show_accounts_view, show_new_account_view,
-                 transaction_service, account_id, account_name):
+                 transaction_service, account_service, account_id, account_name, user_id):
         self._root = root
         self._show_accounts_view = show_accounts_view
         self._show_new_account_view = show_new_account_view
         self._transaction_service = transaction_service
+        self._account_service = account_service
         self._frame = Frame(self._root)
         self._account_id = account_id
         self._account_name = account_name
+        self._user_id = user_id
+        self._accounts = self._account_service.find_transaction_accounts_by_user_id(
+            user_id)
+        self._account_name_to_id = {acc.name: acc.id for acc in self._accounts}
+        self._account_id_to_name = {acc.id: acc.name for acc in self._accounts}
 
     def start(self):
         self._frame = Frame(self._root)
@@ -33,6 +38,7 @@ class TransactionsView:
         self._frame.columnconfigure(1, weight=1)
         self._frame.columnconfigure(2, weight=1)
         self._frame.columnconfigure(3, weight=1)
+        self._frame.columnconfigure(4, weight=1)
 
         default_label = Label(
             self._frame,
@@ -45,10 +51,23 @@ class TransactionsView:
                                 command=self._show_accounts_view)
 
         self._date_text = Label(self._frame, text="Date (YYYY-MM-DD):")
+        self._from_account_text = Label(
+            self._frame, text="Kredit Account (from):")
+        self._to_account_text = Label(self._frame, text="Debet Account (to):")
         self._description_text = Label(self._frame, text="Description:")
         self._amount_text = Label(self._frame, text="Amount:")
+
         self._date_entry = Entry(self._frame)
         self._date_entry.insert(0, datetime.now().strftime("%Y-%m-%d"))
+
+        account_names = [acc.name for acc in self._accounts]
+
+        self._from_account_var = ttk.Combobox(
+            self._frame, values=account_names, state="readonly")
+        self._from_account_var.set(self._account_name)
+        self._to_account_var = ttk.Combobox(
+            self._frame, values=account_names, state="readonly")
+
         self._description_entry = Entry(self._frame)
         self._amount_entry = Entry(self._frame)
         add_transaction_button = Button(
@@ -83,14 +102,22 @@ class TransactionsView:
                        padx=20, pady=10, sticky="nsew")
 
         self._date_text.grid(row=3, column=0, padx=5, pady=(10, 2), sticky="w")
-        self._description_text.grid(
-            row=3, column=1, padx=5, pady=(10, 2), sticky="w")
-        self._amount_text.grid(row=3, column=2, padx=5,
+        self._amount_text.grid(row=3, column=1, padx=5,
                                pady=(10, 2), sticky="w")
+        self._description_text.grid(
+            row=5, column=0, padx=5, pady=(10, 2), sticky="w")
+        self._from_account_text.grid(
+            row=5, column=1, padx=5, pady=(10, 2), sticky="w")
+        self._to_account_text.grid(
+            row=5, column=2, padx=5, pady=(10, 2), sticky="w")
+
         self._date_entry.grid(row=4, column=0, padx=5, pady=(0, 10))
-        self._description_entry.grid(row=4, column=1, padx=5, pady=(0, 10))
-        self._amount_entry.grid(row=4, column=2, padx=5, pady=(0, 10))
-        add_transaction_button.grid(row=4, column=3, padx=5, pady=(0, 10))
+        self._amount_entry.grid(row=4, column=1, padx=5, pady=(0, 10))
+        self._description_entry.grid(row=6, column=0, padx=5, pady=(0, 10))
+        self._from_account_var.grid(row=6, column=1, padx=5, pady=(0, 10))
+        self._to_account_var.grid(row=6, column=2, padx=5, pady=(0, 10))
+        add_transaction_button.grid(
+            row=6, column=3, padx=5, pady=(0, 10), sticky="e")
 
         self._frame.pack()
         self.tree.bind("<Double-1>", lambda e: self._on_double_click(e))
@@ -103,32 +130,49 @@ class TransactionsView:
             self._account_id)
         for i, transaction in enumerate(transactions):
             tag = "evenrow" if i % 2 == 0 else "oddrow"
+            from_name = self._account_id_to_name.get(
+                transaction.from_account_id, "Unknown")
+            to_name = self._account_id_to_name.get(
+                transaction.to_account_id, "Unknown")
             self.tree.insert("", "end", iid=str(transaction.id), values=(
-                transaction.date, transaction.description, f"{transaction.amount:.2f} €"), tags=tag)
+                from_name, to_name, f"{transaction.amount:.2f} €"), tags=tag)
 
     def _add_transaction(self):
         date = self._date_entry.get().strip()
+        from_account_name = self._from_account_var.get()
+        to_account_name = self._to_account_var.get()
         description = self._description_entry.get().strip()
         amount_text = self._amount_entry.get().strip()
 
-        if not date or not description or not amount_text:
+        if not date or not from_account_name or not to_account_name or not description or not amount_text:
             messagebox.showerror("Error", "Please fill in all fields")
             return
 
-        if date and not validate_date(date):
+        if from_account_name == to_account_name:
+            messagebox.showerror(
+                "Error", "Kredit and Debet accounts must be different")
+            return
+
+        if date and not _validate_date(date):
             messagebox.showerror(
                 "Error", "Must be a valid date in YYYY-MM-DD format")
             return
 
         try:
             amount = float(amount_text)
+            if amount <= 0:
+                messagebox.showerror("Error", "Amount must be positive")
+                return
         except ValueError:
             messagebox.showerror(
                 "Error", "Amount must be a number, use a dot to separate decimals")
             return
 
+        from_account_id = self._account_name_to_id[from_account_name]
+        to_account_id = self._account_name_to_id[to_account_name]
+
         self._transaction_service.create_transaction(amount, date, description,
-                                                     self._account_id)
+                                                     from_account_id, to_account_id)
         self._description_entry.delete(0, "end")
         self._amount_entry.delete(0, "end")
         self._get_transactions()
@@ -200,13 +244,16 @@ class TransactionsView:
                 messagebox.showerror("Error", "Please fill in all fields")
                 return
 
-            if new_date and not validate_date(new_date):
+            if new_date and not _validate_date(new_date):
                 messagebox.showerror(
                     "Error", "Must be a valid date in YYYY-MM-DD format")
                 return
 
             try:
                 new_amount = float(new_amount_text)
+                if new_amount <= 0:
+                    messagebox.showerror("Error", "Amount must be positive")
+                    return
             except ValueError:
                 messagebox.showerror(
                     "Error", "Amount must be a number, use a dot to separate decimals")
@@ -219,6 +266,5 @@ class TransactionsView:
 
         save_button = Button(edit_window, text="Save", command=save_changes)
         save_button.grid(row=3, column=0, pady=10, sticky="e")
-        cancel_button = Button(edit_window, text="Cancel",
-                               command=edit_window.destroy)
+        cancel_button = Button(edit_window, text="Cancel", command=edit_window.destroy)
         cancel_button.grid(row=3, column=1, pady=10, sticky="w")

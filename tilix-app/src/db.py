@@ -27,9 +27,17 @@ def initialize_database():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             balance FLOAT NOT NULL,
-            user_id INTEGER REFERENCES users(id)
+            user_id INTEGER REFERENCES users(id),
+            is_external INTEGER NOT NULL DEFAULT 0
         )
     """)
+
+    cursor.execute("PRAGMA table_info(accounts)")
+    account_columns = [row[1] for row in cursor.fetchall()]
+    if "is_external" not in account_columns:
+        cursor.execute(
+            "ALTER TABLE accounts ADD COLUMN is_external INTEGER NOT NULL DEFAULT 0"
+        )
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
@@ -37,7 +45,8 @@ def initialize_database():
             amount FLOAT NOT NULL,
             date TEXT NOT NULL,
             description TEXT,
-            account_id INTEGER REFERENCES accounts(id)
+            from_account_id INTEGER NOT NULL REFERENCES accounts(id),
+            to_account_id INTEGER NOT NULL REFERENCES accounts(id)
         )
     """)
 
@@ -67,8 +76,8 @@ def query_one(sql, params=()):
 def drop_tables():
     connection = get_database_connection()
     cursor = connection.cursor()
+    cursor.execute("DROP TABLE IF EXISTS transactions")
     cursor.execute("DROP TABLE IF EXISTS accounts")
     cursor.execute("DROP TABLE IF EXISTS users")
-    cursor.execute("DROP TABLE IF EXISTS transactions")
     connection.commit()
     connection.close()

@@ -43,8 +43,8 @@ class UI:
         accounts_view = AccountsView(
             self._root,
             self._show_login_view,
-            lambda: self.show_new_account_view(username, user_id),
-            lambda account_id, account_name: self.show_transactions_view(
+            lambda: self._show_new_account_view(username, user_id),
+            lambda account_id, account_name: self._show_transactions_view(
                 account_id, username, user_id, account_name),
             self._account_service,
             username,
@@ -52,7 +52,7 @@ class UI:
         )
         accounts_view.start()
 
-    def show_new_account_view(self, username, user_id):
+    def _show_new_account_view(self, username, user_id):
         self._clear_view()
         new_account_view = NewAccountView(
             self._root,
@@ -62,16 +62,18 @@ class UI:
         )
         new_account_view.start()
 
-    def show_transactions_view(self, account_id, username, user_id, account_name):
+    def _show_transactions_view(self, account_id, username, user_id, account_name):
         from .transactions_view import TransactionsView
         self._clear_view()
         transactions_view = TransactionsView(
             self._root,
             lambda: self._show_accounts_view(username, user_id),
-            lambda: self.show_new_account_view(username, user_id),
+            lambda: self._show_new_account_view(username, user_id),
             self._transaction_service,
+            self._account_service,
             account_id,
-            account_name
+            account_name,
+            user_id
         )
         transactions_view.start()
 

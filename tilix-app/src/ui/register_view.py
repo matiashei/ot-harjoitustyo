@@ -28,7 +28,7 @@ class RegisterView:
         self._password_confirm_entry = Entry(self._frame, show="*")
         self._status_label = Label(self._frame, text="", fg="red")
         submit_button = Button(
-            self._frame, text="Submit", command=self.register)
+            self._frame, text="Submit", command=self._register)
         login_view_button = Button(
             self._frame, text="Login", command=self._show_login_view)
 
@@ -48,7 +48,7 @@ class RegisterView:
     def destroy(self):
         self._frame.destroy()
 
-    def register(self):
+    def _register(self):
         username = self._username_entry.get().strip()
         password = self._password_entry.get()
         password_confirm = self._password_confirm_entry.get()

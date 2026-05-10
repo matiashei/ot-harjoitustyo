@@ -17,7 +17,7 @@ class TransactionService:
         self._transaction_repository = transaction_repository
         self._account_repository = account_repository
 
-    def create_transaction(self, amount, date, description, account_id):
+    def create_transaction(self, amount, date, description, from_account_id, to_account_id):
         """
         Luo uuden tilitapahtuman.
 
@@ -25,15 +25,17 @@ class TransactionService:
             amount: Tilitapahtuman summa.
             date: Tilitapahtuman päivämäärä.
             description: Tilitapahtuman kuvaus.
-            account_id: Tilitapahtuman tilin id.
+            from_account_id: Tili, jolta raha otetaan (debet).
+            to_account_id: Tili, jolle raha menee (kredit).
 
         Returns:
             Transaction: Uusi tilitapahtuman tiedot sisältävä Transaction-olio.
         """
         transaction = self._transaction_repository.create_transaction(
-            amount, date, description, account_id)
+            amount, date, description, from_account_id, to_account_id)
 
-        self._sync_account_balance(account_id)
+        self._sync_account_balance(from_account_id)
+        self._sync_account_balance(to_account_id)
 
         return transaction
 
@@ -71,16 +73,20 @@ class TransactionService:
         Returns:
             None
         """
-        account_id = None
+        from_account_id = None
+        to_account_id = None
         if self._account_repository:
             transaction = self._transaction_repository.find_transaction_by_id(
                 transaction_id)
             if transaction:
-                account_id = transaction.account_id
+                from_account_id = transaction.from_account_id
+                to_account_id = transaction.to_account_id
 
         self._transaction_repository.delete_transaction(transaction_id)
-        if account_id is not None:
-            self._sync_account_balance(account_id)
+        if from_account_id is not None:
+            self._sync_account_balance(from_account_id)
+        if to_account_id is not None:
+            self._sync_account_balance(to_account_id)
 
     def update_transaction(self, transaction_id, amount, date, description):
         """
@@ -95,22 +101,26 @@ class TransactionService:
         Returns:
             None
         """
-        account_id = None
+        from_account_id = None
+        to_account_id = None
         if self._account_repository:
             old_transaction = self._transaction_repository.find_transaction_by_id(
                 transaction_id)
             if old_transaction:
-                account_id = old_transaction.account_id
+                from_account_id = old_transaction.from_account_id
+                to_account_id = old_transaction.to_account_id
 
         self._transaction_repository.update_transaction(
             transaction_id, amount, date, description)
 
-        if account_id is not None:
-            self._sync_account_balance(account_id)
+        if from_account_id is not None:
+            self._sync_account_balance(from_account_id)
+        if to_account_id is not None:
+            self._sync_account_balance(to_account_id)
 
     def _sync_account_balance(self, account_id):
         """
-        Päivittää tilin balanssin kun tilitapahtumat muuttuvat.
+        Päivittää tilien balanssit kun tilitapahtumat muuttuvat.
 
         Args:
             account_id: Päivitettävän tilin id.
@@ -124,6 +134,11 @@ class TransactionService:
         if account:
             transactions = self._transaction_repository.find_transactions_by_account_id(
                 account_id)
-            new_balance = sum(t.amount for t in transactions)
+            new_balance = 0
+            for t in transactions:
+                if t.to_account_id == account_id:
+                    new_balance += t.amount
+                elif t.from_account_id == account_id:
+                    new_balance -= t.amount
             self._account_repository.update_account_balance(
                 account_id, new_balance)

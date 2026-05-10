@@ -25,7 +25,7 @@ class LoginView:
         password_label = Label(self._frame, text="Password")
         self._password_entry = Entry(self._frame, show="*")
         self._status_label = Label(self._frame, text="", fg="red")
-        submit_button = Button(self._frame, text="Submit", command=self.login)
+        submit_button = Button(self._frame, text="Submit", command=self._login)
         register_button = Button(
             self._frame, text="Register", command=self._show_register_view)
 
@@ -43,7 +43,7 @@ class LoginView:
     def destroy(self):
         self._frame.destroy()
 
-    def login(self):
+    def _login(self):
         username = self._username_entry.get().strip()
         password = self._password_entry.get()
 

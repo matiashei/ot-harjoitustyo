@@ -14,24 +14,25 @@ class AccountRepository:
         """Luokan konstruktori, joka ottaa tietokantayhteyden."""
         self._connection = connection
 
-    def create_account(self, name, user_id):
+    def create_account(self, name, user_id, is_external=False):
         """Luo uuden tilin tietokantaan.
 
         Args:
             name: Tilin nimi.
             user_id: Tilin omistavan käyttäjän id.
+            is_external: Onko tili ulkoinen.
 
         Returns:
             Account: Uusi tilitiedot sisältävä Account-olio,
             jonka balanssiksi on alustettu 0€.
-            """
-        sql = "INSERT INTO accounts (name, balance, user_id) VALUES (?, 0, ?)"
+        """
+        sql = "INSERT INTO accounts (name, balance, user_id, is_external) VALUES (?, 0, ?, ?)"
         cursor = self._connection.cursor()
-        cursor.execute(sql, (name, user_id))
+        cursor.execute(sql, (name, user_id, int(is_external)))
         self._connection.commit()
 
         account_id = cursor.lastrowid
-        return Account(account_id, name, 0, user_id)
+        return Account(account_id, name, 0, user_id, is_external)
 
     def find_accounts_by_user_id(self, user_id):
         """Hakee tietokannasta kaikki käyttäjälle kuuluvat tilit ja niiden tiedot.
@@ -41,18 +42,27 @@ class AccountRepository:
 
         Returns:
             Lista Account-olioista, jotka täsmäävät id:n kanssa.
-            """
+        """
         rows = db.query(
             """
             SELECT
                 accounts.id,
                 accounts.name,
-                COALESCE(SUM(transactions.amount), 0) AS balance,
-                accounts.user_id
+                COALESCE(SUM(
+                  CASE WHEN transactions.to_account_id = accounts.id
+                  THEN transactions.amount ELSE 0 END), 0) -
+                COALESCE(SUM(
+                  CASE WHEN transactions.from_account_id = accounts.id
+                  THEN transactions.amount ELSE 0 END), 0) AS balance,
+                                accounts.user_id,
+                                accounts.is_external
             FROM accounts
-            LEFT JOIN transactions ON accounts.id = transactions.account_id
-            WHERE accounts.user_id = ?
-            GROUP BY accounts.id, accounts.name, accounts.user_id
+            LEFT JOIN transactions ON (
+              accounts.id = transactions.to_account_id
+              OR accounts.id = transactions.from_account_id)
+                            WHERE accounts.user_id = ? AND accounts.is_external = 0
+                            GROUP BY accounts.id, accounts.name, accounts.user_id,
+                                    accounts.is_external
             """,
             (user_id,)
         )
@@ -60,7 +70,39 @@ class AccountRepository:
         accounts = []
         for row in rows:
             accounts.append(
-                Account(row["id"], row["name"], row["balance"], row["user_id"]))
+                Account(row["id"], row["name"], row["balance"], row["user_id"], row["is_external"]))
+
+        return accounts
+
+    def find_transaction_accounts_by_user_id(self, user_id):
+        rows = db.query(
+            """
+            SELECT
+                accounts.id,
+                accounts.name,
+                COALESCE(SUM(
+                    CASE WHEN transactions.to_account_id = accounts.id
+                    THEN transactions.amount ELSE 0 END), 0) -
+                COALESCE(SUM(
+                    CASE WHEN transactions.from_account_id = accounts.id
+                    THEN transactions.amount ELSE 0 END), 0) AS balance,
+                accounts.user_id,
+                accounts.is_external
+            FROM accounts
+            LEFT JOIN transactions ON (
+                accounts.id = transactions.to_account_id
+                OR accounts.id = transactions.from_account_id)
+            WHERE accounts.user_id = ?
+            GROUP BY accounts.id, accounts.name, accounts.user_id, accounts.is_external
+            ORDER BY accounts.is_external, accounts.name
+            """,
+            (user_id,)
+        )
+
+        accounts = []
+        for row in rows:
+            accounts.append(
+                Account(row["id"], row["name"], row["balance"], row["user_id"], row["is_external"]))
 
         return accounts
 
@@ -80,7 +122,8 @@ class AccountRepository:
         )
 
         if row:
-            return Account(row["id"], row["name"], row["balance"], row["user_id"])
+            return Account(row["id"], row["name"], row["balance"],
+                           row["user_id"], row["is_external"])
 
         return None
 

@@ -1,4 +1,4 @@
-from tkinter import Label, Entry, Button, Frame
+from tkinter import Label, Entry, Button, Frame, Checkbutton, IntVar, messagebox
 from src.db import get_database_connection
 from src.repositories.account_repository import AccountRepository
 from src.services.account_services import AccountService
@@ -15,6 +15,7 @@ class NewAccountView:
         self._username = username
         self._user_id = user_id
         self._status_label = None
+        self._is_external_var = IntVar(value=0)
 
     def start(self):
         register_label = Label(self._frame, text="CREATE ACCOUNT", font=(
@@ -24,15 +25,21 @@ class NewAccountView:
             command=lambda: self._show_accounts_view(self._username, self._user_id))
         name_label = Label(self._frame, text="Account name")
         self.name_label = Entry(self._frame)
+        external_checkbox = Checkbutton(
+            self._frame,
+            text="External account",
+            variable=self._is_external_var
+        )
         self._status_label = Label(self._frame, text="", fg="red")
 
         self._create_button = Button(
-            self._frame, text="Create account", command=self.create_account)
+            self._frame, text="Create account", command=self._create_account)
 
         register_label.grid(row=0, column=0, columnspan=2, pady=30)
         go_back_button.grid(row=0, column=2, padx=10, pady=30)
         name_label.grid(row=1, column=0, pady=10)
         self.name_label.grid(row=1, column=1, pady=10)
+        external_checkbox.grid(row=2, column=0, columnspan=2, pady=10)
         self._status_label.grid(row=3, column=0, columnspan=2)
         self._create_button.grid(row=4, column=0, columnspan=2, pady=10)
         self._frame.pack()
@@ -40,12 +47,18 @@ class NewAccountView:
     def destroy(self):
         self._frame.destroy()
 
-    def create_account(self):
+    def _create_account(self):
         name = self.name_label.get().strip()
 
         if not name:
             self._status_label.config(text="Account name is required")
             return
 
-        self._account_service.create_account(name, self._user_id)
+        is_external = bool(self._is_external_var.get())
+        self._account_service.create_account(name, self._user_id, is_external)
+        if is_external:
+            messagebox.showinfo(
+                "Account created",
+                "External account created. It will be available in transactions."
+            )
         self._show_accounts_view(self._username, self._user_id)

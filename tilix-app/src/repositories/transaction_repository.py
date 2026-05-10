@@ -14,7 +14,7 @@ class TransactionRepository:
         """Luokan konstruktori, joka ottaa tietokantayhteyden."""
         self._connection = connection
 
-    def create_transaction(self, amount, date, description, account_id):
+    def create_transaction(self, amount, date, description, from_account_id, to_account_id):
         """
         Luo uuden tilitapahtuman tietokantaan.
 
@@ -22,22 +22,27 @@ class TransactionRepository:
             amount: Tilitapahtuman summa.
             date: Tilitapahtuman päivämäärä.
             description: Tilitapahtuman kuvaus.
-            account_id: Tilitapahtuman tilin id.
+            from_account_id: Tili, jolta raha otetaan (debet).
+            to_account_id: Tili, jolle raha menee (kredit).
 
         Returns:
             Transaction: Tilitapahtuman tiedot sisältävä Transaction-olio.
         """
-        sql = "INSERT INTO transactions (amount, date, description, account_id)VALUES (?, ?, ?, ?)"
+        sql = """INSERT INTO transactions
+                (amount, date, description, from_account_id, to_account_id)
+                VALUES (?, ?, ?, ?, ?)"""
         cursor = self._connection.cursor()
-        cursor.execute(sql, (amount, date, description, account_id))
+        cursor.execute(sql, (amount, date, description,
+                       from_account_id, to_account_id))
         self._connection.commit()
 
         transaction_id = cursor.lastrowid
-        return Transaction(transaction_id, amount, date, description, account_id)
+        return Transaction(transaction_id, amount, date,
+                           description, from_account_id, to_account_id)
 
     def find_transactions_by_account_id(self, account_id):
         """
-        Hakee tietokannasta kaikki tilitapahtumat tilin id:n perusteella.
+        Hakee tietokannasta kaikki tilitapahtumat, jotka koskevat tilejä.
 
         Args:
             account_id: Tilin id, jonka tilitapahtumat haetaan.
@@ -45,17 +50,16 @@ class TransactionRepository:
         Returns:
             Lista Transaction-olioista, jotka täsmäävät tilin id:n kanssa.
         """
-
         rows = db.query(
-            "SELECT * FROM transactions WHERE account_id = ?",
-            (account_id,)
+            "SELECT * FROM transactions WHERE from_account_id = ? OR to_account_id = ?",
+            (account_id, account_id)
         )
 
         transactions = []
         for row in rows:
             transactions.append(
                 Transaction(row["id"], row["amount"], row["date"],
-                            row["description"], row["account_id"]))
+                            row["description"], row["from_account_id"], row["to_account_id"]))
 
         return transactions
 
@@ -76,7 +80,7 @@ class TransactionRepository:
 
     def delete_transactions_by_account_id(self, account_id):
         """
-        Poistaa kaikki tilitapahtumat, jotka kuuluvat tietylle tilille.
+        Poistaa kaikki tilitapahtumat, jotka koskevat tilejä.
 
         Args:
             account_id: Tilin id, jonka tapahtumat poistetaan.
@@ -84,9 +88,9 @@ class TransactionRepository:
         Returns:
             None
         """
-        sql = "DELETE FROM transactions WHERE account_id = ?"
+        sql = "DELETE FROM transactions WHERE from_account_id = ? OR to_account_id = ?"
         cursor = self._connection.cursor()
-        cursor.execute(sql, (account_id,))
+        cursor.execute(sql, (account_id, account_id))
         self._connection.commit()
 
     def update_transaction(self, transaction_id, amount, date, description):
@@ -117,7 +121,6 @@ class TransactionRepository:
         Returns:
             Transaction: Transaction-olio, joka täsmää id:n kanssa, None jos tapahtumaa ei löydy.
         """
-
         row = db.query_one(
             "SELECT * FROM transactions WHERE id = ?",
             (transaction_id,)
@@ -125,6 +128,6 @@ class TransactionRepository:
 
         if row:
             return Transaction(row["id"], row["amount"], row["date"],
-                               row["description"], row["account_id"])
+                               row["description"], row["from_account_id"], row["to_account_id"])
 
         return None
