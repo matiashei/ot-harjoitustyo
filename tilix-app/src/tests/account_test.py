@@ -6,7 +6,7 @@ from src.services.account_services import AccountService
 from src.services.transaction_services import TransactionService
 
 
-class TestAccountService(unittest.TestCase):
+class TestAccount(unittest.TestCase):
     def setUp(self):
         db.drop_tables()
         db.initialize_database()

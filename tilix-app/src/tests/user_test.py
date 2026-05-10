@@ -4,7 +4,7 @@ from src.repositories.user_repository import UserRepository
 from src.services.user_services import UserService
 
 
-class TestUserService(unittest.TestCase):
+class TestUser(unittest.TestCase):
     def setUp(self):
         db.drop_tables()
         db.initialize_database()

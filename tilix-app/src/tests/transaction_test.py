@@ -5,7 +5,7 @@ from src.repositories.transaction_repository import TransactionRepository
 from src.services.transaction_services import TransactionService
 
 
-class TestTransactionService(unittest.TestCase):
+class TestTransaction(unittest.TestCase):
     def setUp(self):
         db.drop_tables()
         db.initialize_database()

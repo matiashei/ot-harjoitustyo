@@ -80,6 +80,7 @@ class AccountRepository:
             SELECT
                 accounts.id,
                 accounts.name,
+
                 COALESCE(SUM(
                     CASE WHEN transactions.to_account_id = accounts.id
                     THEN transactions.amount ELSE 0 END), 0) -
