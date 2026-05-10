@@ -9,22 +9,23 @@ Sovelluksen avulla käyttäjän on mahdollista toteuttaa kahdenkertaista taloude
 * [Testaaminen](dokumentaatio/testaus.md)
 * [Tekoälytyökalujen käyttö](dokumentaatio/tekoaly.md)
 
-Viikon 6 release löytyy [täältä](releases/tag/viikko6).
+Viikon 7 release löytyy [täältä](releases/tag/viikko7).
 
 ## Asennus
-1. Asenna sovelluksen riippuvuudet komennolla:
+1. Siirry kansioon ```tilix-app```
+2. Asenna sovelluksen riippuvuudet komennolla:
 ```
 poetry install
 ```
-2. Käynnistä virtuaaliympäristö komennolla:
+3. Käynnistä virtuaaliympäristö komennolla:
 ```
 eval $(poetry env activate)
 ```
-3. Alusta sovellus komennolla:
+4. Alusta sovellus komennolla:
 ```
 poetry run invoke build
 ```
-4. Käynnistä sovellus komennolla:
+5. Käynnistä sovellus komennolla:
 ```
 poetry run invoke start
 ```
