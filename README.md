@@ -17,6 +17,7 @@ Viikon 7 release löytyy [täältä](releases/tag/viikko7).
 ```
 poetry install
 ```
+4. Luo juurihakemistoon .env-tiedosto, joka määrittelee tietokantatiedoston nimen
 3. Käynnistä virtuaaliympäristö komennolla:
 ```
 eval $(poetry env activate)
