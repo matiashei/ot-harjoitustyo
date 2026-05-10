@@ -1,5 +1,5 @@
 # Tilix App
-Sovelluksen avulla käyttäjän on mahdollista toteuttaa kaksinkertaista talouden kirjanpitoa, jossa jokaisen tapahtuman yhteydessä merkitään sekä mistä raha on tullut että minne se on päätynyt. Käyttäjä luo sovellukseen henkilökohtaiset tunnukset.
+Sovelluksen avulla käyttäjän on mahdollista toteuttaa kahdenkertaista talouden kirjanpitoa, jossa jokaisen tapahtuman yhteydessä merkitään sekä mistä raha on tullut että minne se on päätynyt. Käyttäjä luo sovellukseen henkilökohtaiset tunnukset.
 ## Dokumentaatio
 * [Käyttöohje](dokumentaatio/kayttoohje.md)
 * [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
